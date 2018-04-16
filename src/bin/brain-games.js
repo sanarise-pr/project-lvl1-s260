@@ -1,3 +1,6 @@
 #!/usr/bin/env node
+import * as core from '..';
 
-console.log('Welcome to the Brain Games!');
+core.postWelcome();
+const userName = core.askUserName();
+core.postUserGreeting(userName);
