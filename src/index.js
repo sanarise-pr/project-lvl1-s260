@@ -39,16 +39,3 @@ export const postTryAgain = (userName) => {
 export const postFinalCongrats = (userName) => {
   console.log(`Congratulations, ${userName}!`);
 };
-
-export const askQuestions = (questionsLimit, mistakesLimit = 0) => (questionCallback) => {
-  let mistakes = 0;
-  for (let i = 0; i < questionsLimit; i += 1) {
-    if (!questionCallback(i)) {
-      mistakes += 1;
-    }
-    if (mistakes > mistakesLimit) {
-      return false;
-    }
-  }
-  return true;
-};

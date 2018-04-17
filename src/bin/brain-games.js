@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import * as core from '..';
+import * as io from '..';
 
-core.postWelcome();
-core.postEmtyLine();
+io.postWelcome();
+io.postEmtyLine();
 
-const userName = core.askUserName();
-core.postUserGreeting(userName);
+const userName = io.askUserName();
+io.postUserGreeting(userName);
