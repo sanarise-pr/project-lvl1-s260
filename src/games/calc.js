@@ -1,12 +1,13 @@
 import { createGame } from '../game';
 import { createTask } from '../task';
 import { randomIntInRange } from '../math';
+import runGame from '..';
 
 const GAME_RULES = 'What is the result of the expression?';
 const MIN_NUM = 0;
 const MAX_NUM = 99;
 
-export default createGame(GAME_RULES, () => {
+export const game = createGame(GAME_RULES, () => {
   const num1 = randomIntInRange(MIN_NUM, MAX_NUM);
   const num2 = randomIntInRange(MIN_NUM, MAX_NUM);
 
@@ -31,3 +32,5 @@ export default createGame(GAME_RULES, () => {
 
   return createTask(question, answer);
 });
+
+export default () => runGame(game);
