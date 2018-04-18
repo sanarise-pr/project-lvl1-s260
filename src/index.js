@@ -5,7 +5,7 @@ import * as io from './console-io';
 const runTask = (task) => {
   io.postQuestion(getQuestion(task));
   const userAnswer = io.askUserAnswer();
-  const correctAnswer = String(getAnswer(task));
+  const correctAnswer = String(getAnswer(task)); // TODO: remove String
 
   if (userAnswer === correctAnswer) {
     io.postCorrectAnswerCongrats();
