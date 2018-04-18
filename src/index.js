@@ -2,27 +2,18 @@ import { getRules, createTask } from './game';
 import { getQuestion, getAnswer } from './task';
 import * as io from './console-io';
 
-const runTasks = getTaskCallback => (tasksLimit, mistakesLimit = 0) => {
-  let mistakes = 0;
-  for (let i = 0; i < tasksLimit; i += 1) {
-    const task = getTaskCallback(i, mistakes);
+const runTask = (task) => {
+  io.postQuestion(getQuestion(task));
+  const userAnswer = io.askUserAnswer();
+  const correctAnswer = String(getAnswer(task));
 
-    io.postQuestion(getQuestion(task));
-    const userAnswer = io.askUserAnswer();
-    const correctAnswer = String(getAnswer(task));
-
-    if (userAnswer !== correctAnswer) {
-      mistakes += 1;
-      io.postWrongAnswerMessage(userAnswer, correctAnswer);
-    } else {
-      io.postCorrectAnswerCongrats();
-    }
-
-    if (mistakes > mistakesLimit) {
-      break;
-    }
+  if (userAnswer === correctAnswer) {
+    io.postCorrectAnswerCongrats();
+    return 0;
   }
-  return mistakes;
+
+  io.postWrongAnswerMessage(userAnswer, correctAnswer);
+  return 1;
 };
 
 export default (game, tasksLimit = 3, mistakesLimit = 0) => {
@@ -34,9 +25,14 @@ export default (game, tasksLimit = 3, mistakesLimit = 0) => {
   io.postUserGreeting(userName);
   io.postEmtyLine();
 
-  const mistakesCnt = runTasks(() => createTask(game))(tasksLimit, mistakesLimit);
+  let i = 0;
+  let mistakes = 0;
+  while (i < tasksLimit && mistakes <= mistakesLimit) {
+    mistakes += runTask(createTask(game));
+    i += 1;
+  }
 
-  if (mistakesCnt > 0) {
+  if (mistakes > 0) {
     io.postTryAgain(userName);
   } else {
     io.postFinalCongrats(userName);
