@@ -1,6 +1,6 @@
 {
   "name": "sanarise-pr-brain-games",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Hexlet Brain Games project",
   "bin": {
     "brain-games": "dist/bin/brain-games.js",
