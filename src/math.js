@@ -2,4 +2,4 @@ export const randomIntInRange = (min, max) => Math.floor(Math.random() * ((max -
 
 export const isEven = int => int % 2 === 0;
 
-export const gcd = (x, y) => (!y ? x : gcd(y, x % y));
+export const gcd = (x, y) => (y === 0 ? x : gcd(y, x % y));
