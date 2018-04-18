@@ -1,8 +1,8 @@
-import runGame from '../game-runer';
-import { getRules } from '../game';
+import { getRules, createTask } from '../game';
+import runTasks from './run-tasks';
 import * as io from '../console-io';
 
-export default (game, questionLimit = 3) => {
+export default (game, tasksLimit = 3, mistakesLimit = 0) => {
   io.postWelcome();
   io.postString(getRules(game));
   io.postEmtyLine();
@@ -11,9 +11,9 @@ export default (game, questionLimit = 3) => {
   io.postUserGreeting(userName);
   io.postEmtyLine();
 
-  const mistakes = runGame(game)(questionLimit);
+  const mistakesCnt = runTasks(() => createTask(game))(tasksLimit, mistakesLimit);
 
-  if (mistakes > 0) {
+  if (mistakesCnt > 0) {
     io.postTryAgain(userName);
   } else {
     io.postFinalCongrats(userName);

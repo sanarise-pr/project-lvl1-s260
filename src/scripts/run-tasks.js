@@ -1,11 +1,10 @@
-import { createTask } from './game';
-import { getQuestion, getAnswer } from './task';
-import * as io from './console-io';
+import { getQuestion, getAnswer } from '../task';
+import * as io from '../console-io';
 
-export default game => (questionsLimit, mistakesLimit = 0) => {
+export default getTaskCallback => (tasksLimit, mistakesLimit = 0) => {
   let mistakes = 0;
-  for (let i = 0; i < questionsLimit; i += 1) {
-    const task = createTask(game);
+  for (let i = 0; i < tasksLimit; i += 1) {
+    const task = getTaskCallback(i, mistakes);
 
     io.postQuestion(getQuestion(task));
     const userAnswer = io.askUserAnswer();
