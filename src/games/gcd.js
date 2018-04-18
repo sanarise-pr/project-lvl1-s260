@@ -11,7 +11,7 @@ export const game = createGame(GAME_RULES, () => {
   const num1 = randomIntInRange(MIN_NUM, MAX_NUM);
   const num2 = randomIntInRange(MIN_NUM, MAX_NUM);
 
-  return createTask(`${num1} ${num2}`, gcd(num1, num2));
+  return createTask(`${num1} ${num2}`, String(gcd(num1, num2)));
 });
 
 export default () => runGame(game);

@@ -30,7 +30,7 @@ export const game = createGame(GAME_RULES, () => {
     default:
   }
 
-  return createTask(question, answer);
+  return createTask(question, String(answer));
 });
 
 export default () => runGame(game);

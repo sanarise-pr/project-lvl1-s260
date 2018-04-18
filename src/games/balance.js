@@ -24,7 +24,7 @@ const balance = (num) => {
 
   const balancedArr = iter(digitize(num));
   balancedArr.sort();
-  return Number(balancedArr.join(''));
+  return balancedArr.join('');
 };
 
 export const game = createGame(GAME_RULES, () => {
