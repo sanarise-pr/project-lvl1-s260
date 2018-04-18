@@ -1,6 +1,6 @@
 import runGame from '../game-runer';
 import { getRules } from '../game';
-import * as io from '..';
+import * as io from '../console-io';
 
 export default (game, questionLimit = 3) => {
   io.postWelcome();

@@ -1,6 +1,6 @@
 import { createTask } from './game';
 import { getQuestion, getAnswer } from './task';
-import * as io from '.';
+import * as io from './console-io';
 
 export default game => (questionsLimit, mistakesLimit = 0) => {
   let mistakes = 0;
