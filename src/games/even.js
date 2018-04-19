@@ -1,5 +1,3 @@
-import { createGame } from '../game';
-import { createTask } from '../task';
 import { randomIntInRange, isEven } from '../math';
 import runGame from '..';
 
@@ -7,9 +5,12 @@ const GAME_RULES = 'Answer "yes" if number even otherwise answer "no".';
 const MIN_NUM = 0;
 const MAX_NUM = 999;
 
-export const game = createGame(GAME_RULES, () => {
-  const num = randomIntInRange(MIN_NUM, MAX_NUM);
-  return createTask(num, isEven(num) ? 'yes' : 'no');
-});
+export const game = {
+  rules: GAME_RULES,
+  createTask: () => {
+    const num = randomIntInRange(MIN_NUM, MAX_NUM);
+    return { question: num, answer: isEven(num) ? 'yes' : 'no' };
+  },
+};
 
 export default () => runGame(game);

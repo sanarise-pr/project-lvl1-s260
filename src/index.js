@@ -1,11 +1,9 @@
-import { getRules, createTask } from './game';
-import { getQuestion, getAnswer } from './task';
 import * as io from './console-io';
 
 const runTask = (task) => {
-  io.postQuestion(getQuestion(task));
+  io.postQuestion(task.question);
   const userAnswer = io.askUserAnswer();
-  const correctAnswer = getAnswer(task);
+  const correctAnswer = task.answer;
 
   if (userAnswer === correctAnswer) {
     io.postCorrectAnswerCongrats();
@@ -18,7 +16,7 @@ const runTask = (task) => {
 
 export default (game, tasksLimit = 3, mistakesLimit = 0) => {
   io.postWelcome();
-  io.postString(getRules(game));
+  io.postString(game.rules);
   io.postEmtyLine();
 
   const userName = io.askUserName();
@@ -28,7 +26,8 @@ export default (game, tasksLimit = 3, mistakesLimit = 0) => {
   let i = 0;
   let mistakes = 0;
   while (i < tasksLimit && mistakes <= mistakesLimit) {
-    mistakes += runTask(createTask(game));
+    const task = game.createTask();
+    mistakes += runTask(task);
     i += 1;
   }
 

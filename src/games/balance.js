@@ -1,5 +1,3 @@
-import { createGame } from '../game';
-import { createTask } from '../task';
 import { randomIntInRange, digitize } from '../math';
 import runGame from '..';
 
@@ -27,10 +25,12 @@ const balance = (num) => {
   return balancedArr.join('');
 };
 
-export const game = createGame(GAME_RULES, () => {
-  const num = randomIntInRange(MIN_NUM, MAX_NUM);
-
-  return createTask(num, balance(num));
-});
+export const game = {
+  rules: GAME_RULES,
+  createTask: () => {
+    const num = randomIntInRange(MIN_NUM, MAX_NUM);
+    return { question: num, answer: balance(num) };
+  },
+};
 
 export default () => runGame(game);
