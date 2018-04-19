@@ -1,5 +1,7 @@
 import readlineSync from 'readline-sync';
 
+const TASK_LIMIT = 3;
+
 const runTask = (task) => {
   console.log(`Question: ${task.question}`);
   const userAnswer = readlineSync.question('Your answer: ');
@@ -7,31 +9,28 @@ const runTask = (task) => {
 
   if (userAnswer === correctAnswer) {
     console.log('Correct!');
-    return 0;
+    return false;
   }
 
   console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}".`);
-  return 1;
+  return true;
 };
 
-export default (game, tasksLimit = 3, mistakesLimit = 0) => {
+export default (game) => {
   console.log('Welcome to the Brain Games!');
   console.log(`${game.rules}\n`);
 
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!\n`);
 
-  let i = 0;
-  let mistakes = 0;
-  while (i < tasksLimit && mistakes <= mistakesLimit) {
+  for (let i = 0; i < TASK_LIMIT; i += 1) {
     const task = game.createTask();
-    mistakes += runTask(task);
-    i += 1;
+    const mistake = runTask(task);
+    if (mistake) {
+      console.log(`Let's try again, ${userName}!`);
+      return;
+    }
   }
 
-  if (mistakes > 0) {
-    console.log(`Let's try again, ${userName}!`);
-  } else {
-    console.log(`Congratulations, ${userName}!`);
-  }
+  console.log(`Congratulations, ${userName}!`);
 };
