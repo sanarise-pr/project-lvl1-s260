@@ -25,12 +25,9 @@ const balance = (num) => {
   return balancedArr.join('');
 };
 
-export const game = {
-  rules: GAME_RULES,
-  createTask: () => {
-    const num = randomIntInRange(MIN_NUM, MAX_NUM);
-    return { question: num, answer: balance(num) };
-  },
+const createTask = () => {
+  const num = randomIntInRange(MIN_NUM, MAX_NUM);
+  return { question: num, answer: balance(num) };
 };
 
-export default () => runGame(game);
+export default () => runGame(GAME_RULES, createTask);

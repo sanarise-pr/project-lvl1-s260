@@ -16,15 +16,15 @@ const runTask = (task) => {
   return true;
 };
 
-export default (game) => {
+export default (gameRules, createTask) => {
   console.log('Welcome to the Brain Games!');
-  console.log(`${game.rules}\n`);
+  console.log(`${gameRules}\n`);
 
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!\n`);
 
   for (let i = 0; i < TASK_LIMIT; i += 1) {
-    const task = game.createTask();
+    const task = createTask();
     const mistake = runTask(task);
     if (mistake) {
       console.log(`Let's try again, ${userName}!`);
