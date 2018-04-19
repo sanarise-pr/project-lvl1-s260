@@ -1,27 +1,25 @@
-import * as io from './console-io';
+import readlineSync from 'readline-sync';
 
 const runTask = (task) => {
-  io.postQuestion(task.question);
-  const userAnswer = io.askUserAnswer();
+  console.log(`Question: ${task.question}`);
+  const userAnswer = readlineSync.question('Your answer: ');
   const correctAnswer = task.answer;
 
   if (userAnswer === correctAnswer) {
-    io.postCorrectAnswerCongrats();
+    console.log('Correct!');
     return 0;
   }
 
-  io.postWrongAnswerMessage(userAnswer, correctAnswer);
+  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}".`);
   return 1;
 };
 
 export default (game, tasksLimit = 3, mistakesLimit = 0) => {
-  io.postWelcome();
-  io.postString(game.rules);
-  io.postEmtyLine();
+  console.log('Welcome to the Brain Games!');
+  console.log(`${game.rules}\n`);
 
-  const userName = io.askUserName();
-  io.postUserGreeting(userName);
-  io.postEmtyLine();
+  const userName = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${userName}!\n`);
 
   let i = 0;
   let mistakes = 0;
@@ -32,8 +30,8 @@ export default (game, tasksLimit = 3, mistakesLimit = 0) => {
   }
 
   if (mistakes > 0) {
-    io.postTryAgain(userName);
+    console.log(`Let's try again, ${userName}!`);
   } else {
-    io.postFinalCongrats(userName);
+    console.log(`Congratulations, ${userName}!`);
   }
 };
