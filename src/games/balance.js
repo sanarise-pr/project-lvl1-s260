@@ -1,9 +1,9 @@
 import { randomIntInRange, digitize } from '../math';
 import runGame from '..';
 
-const GAME_RULES = 'Balance the given number.';
-const MIN_NUM = 100;
-const MAX_NUM = 1999;
+const gameRules = 'Balance the given number.';
+const minNum = 100;
+const maxNum = 1999;
 
 const balance = (num) => {
   const iter = (numArr) => {
@@ -26,8 +26,8 @@ const balance = (num) => {
 };
 
 const createTask = () => {
-  const num = randomIntInRange(MIN_NUM, MAX_NUM);
+  const num = randomIntInRange(minNum, maxNum);
   return { question: num, answer: balance(num) };
 };
 
-export default () => runGame(GAME_RULES, createTask);
+export default () => runGame(gameRules, createTask);

@@ -1,14 +1,14 @@
 import { randomIntInRange, gcd } from '../math';
 import runGame from '..';
 
-const GAME_RULES = 'Find the greatest common divisor of given numbers.';
-const MIN_NUM = 1;
-const MAX_NUM = 100;
+const gameRules = 'Find the greatest common divisor of given numbers.';
+const minNum = 1;
+const maxNum = 100;
 
 export const createTask = () => {
-  const num1 = randomIntInRange(MIN_NUM, MAX_NUM);
-  const num2 = randomIntInRange(MIN_NUM, MAX_NUM);
+  const num1 = randomIntInRange(minNum, maxNum);
+  const num2 = randomIntInRange(minNum, maxNum);
   return { question: `${num1} ${num2}`, answer: String(gcd(num1, num2)) };
 };
 
-export default () => runGame(GAME_RULES, createTask);
+export default () => runGame(gameRules, createTask);

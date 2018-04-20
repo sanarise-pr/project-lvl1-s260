@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 
-const TASK_LIMIT = 3;
+const taskLimit = 3;
 
 const runTask = (task) => {
   console.log(`Question: ${task.question}`);
@@ -23,7 +23,7 @@ export default (gameRules, createTask) => {
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!\n`);
 
-  for (let i = 0; i < TASK_LIMIT; i += 1) {
+  for (let i = 0; i < taskLimit; i += 1) {
     const task = createTask();
     const mistake = runTask(task);
     if (mistake) {
